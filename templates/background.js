@@ -35,7 +35,7 @@ function executeBrowserCommand(message) {
   const { debug, property, method, returnType, args } = message;
   if (debug) log(`Calling command ${property}.${method}()`, message);
   const promise = new Promise((resolve, reject) => {
-    const target = getProperty(chrome, property);
+    const target = getProperty(this, property);
     if (!method) { // always sync if just accessing property (no method)
       resolve(target);
     } else if (returnType === 'callback') {

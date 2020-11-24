@@ -19,7 +19,7 @@ function listenForResponse(message, timeout) {
         if (message.debug) log(`Got ${message.property}.${message.method}() response`, data, 'in response to:', message);
         targetWindow.removeEventListener('message', windowListener);
         if (data.error) {
-          if(data.error instanceof Error) {
+          if (data.error instanceof Error) {
             reject(data.error);
           } else {
             reject(new Error(data.error));
@@ -94,15 +94,15 @@ module.exports = function createHelpers(userContext = {}) {
   return {
     clearStorage(type, opts = {}) { // type is basically sync or local
       assertPresent(type);
-      return sendBrowserCommand(merge(ctx, opts), `storage.${type}`, 'clear');
+      return sendBrowserCommand(merge(ctx, opts), `chrome.storage.${type}`, 'clear');
     },
     setStorage(type, obj, opts = {}) {
       assertPresent(type);
-      return sendBrowserCommand(merge(ctx, opts), `storage.${type}`, 'set', [obj]);
+      return sendBrowserCommand(merge(ctx, opts), `chrome.storage.${type}`, 'set', [obj]);
     },
     getStorage(type, keys, opts = {}) {
       assertPresent(type);
-      return sendBrowserCommand(merge(ctx, opts), `storage.${type}`, 'get', [keys]);
+      return sendBrowserCommand(merge(ctx, opts), `chrome.storage.${type}`, 'get', [keys]);
     },
     execCommand(property, method, args, opts = {}) {
       assertArray(args);
